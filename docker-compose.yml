@@ -5,40 +5,21 @@ services:
     build:
       context: omicsapp
     container_name: back-end
-    #working_dir: /usr/omicsapp
     networks:
       - node-network
-    #volumes:
-    #  - ./omicsapp:/usr/omicsapp
     tty: true
     ports:
       - "3000:3000"
-    #command: npm start
 
   front-end:
     build:
       context: omicsfe
     container_name: front-end
-    #working_dir: /usr/src/app
     networks:
       - node-network
-    #volumes:
-    #  - ./omicsfe:/usr/src/app
     tty: true
     ports:
       - "5173:5173"
-    #command: npm start
-
-  #db:
-  #  image: nouchka/sqlite3:latest
-  #  stdin_open: true
-  #  container_name: db
-  #  restart: always
-  #  tty: true
-  #  volumes:
-  #    - ./db/:/root/db/
-  #  networks:
-  #    - node-network
 
 networks:
   node-network:
