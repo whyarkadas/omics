@@ -1,8 +1,7 @@
 
 # Omics Data Retrieval and Analysis System
 
-## Here is the url of Omics Data Retrieval and Analysis System running on Heroku cloud.
-https://omics-fe-c4b886d816f2.herokuapp.com/
+## Here is the url of Omics Data Retrieval and Analysis System running on Heroku cloud : https://omics-fe-c4b886d816f2.herokuapp.com/
 
 
 ![Screenshot 2023-12-14 at 13 56 51](https://github.com/whyarkadas/omics/assets/38353086/35f33986-5532-4499-bf01-392510615524)
