@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Button, Dropdown, Grid, Header, Table } from 'semantic-ui-react'
 import OmicData from './OmicData';
 import Search from './Search';
+import { omicApis } from './Api';
+
 
 export default function Omics() {
     const [omics, setOmics] = useState(null);
 
     function retrieveData(geneList) {
-        fetch("http://localhost:3000/api/getGenData", {
+        fetch(omicApis.getGenData.url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

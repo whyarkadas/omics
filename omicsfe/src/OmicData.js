@@ -4,6 +4,7 @@ import Statistics from './Statistics';
 import StatChart from './StatChart';
 import HeatMapChart from './HeatMapChart';
 import DataTable from './DataTable';
+import { omicApis } from './Api';
 
 export default function OmicData(props) {
     const [stat, setStat] = useState(null)
@@ -11,7 +12,7 @@ export default function OmicData(props) {
 
     function getGeneStats(omic) {
         setOmicData(omic)
-        fetch("http://localhost:3000/api/getGenStats", {
+        fetch(omicApis.getGenStats.url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

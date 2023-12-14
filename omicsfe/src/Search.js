@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Dropdown, Grid, Header, Table } from 'semantic-ui-react'
+import { omicApis } from './Api';
 
 export default function Search(props) {
 
@@ -12,7 +13,7 @@ export default function Search(props) {
     }
     useEffect(() => {
         const results = []
-        fetch("http://localhost:3000/api/getAllGenName", {
+        fetch(omicApis.getAllGenName.url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
