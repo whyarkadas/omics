@@ -1,0 +1,6 @@
+omicsfe/node_modules/
+omicsapp/node_modules/
+omicsapp/package-lock.json/
+omicsfe/package-lock.json/
+omicsfe/yarn.lock/
+

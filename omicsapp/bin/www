@@ -1,0 +1,76 @@
+#!/usr/bin/env node
+var app = require('../app');
+var debug = require('debug')('omicsapp:server');
+var http = require('http');
+var sequelize = require('../sequelize');
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+var server = http.createServer(app);
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+  if (isNaN(port)) {
+    return val;
+  }
+  if (port >= 0) {
+    return port;
+  }
+  return false;
+}
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+async function assertDatabaseConnectionOk() {
+  try {
+    await sequelize.authenticate();
+    console.log('Database connection OK!');
+  } catch (error) {
+    console.log('Unable to connect to the database:');
+    console.log(error.message);
+    process.exit(1);
+  }
+}
+
+async function init() {
+  await assertDatabaseConnectionOk();
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
+  // TODO: Check if I am syncing tables in correct place.
+  await sequelize.sync({ alter: true });
+  console.log("All models were synchronized successfully.");
+}
+
+init();
+
